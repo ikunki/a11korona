@@ -1,5 +1,9 @@
+import 'cors';
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ICovidSummary } from '../interfaces/icovidsummary';
 
 export interface ICovidApiSrv {
@@ -10,7 +14,14 @@ export interface ICovidApiSrv {
   providedIn: 'root'
 })
 export class CovidApiService  implements ICovidApiSrv {
-  constructor() {}
+  headers = new HttpHeaders();
+
+  constructor(public http: HttpClient) {
+    this.headers.append('Accept', 'application/json');
+    this.headers.append('Access-Control-Allow-Headers', 'Origin, Accept, Authorization, X-Requested-With, Content-Type');
+    this.headers.append('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT, HEAD, OPTIONS');
+    this.headers.append('Access-Control-Allow-Origin', '*');
+  }
 
   private covidSummary = new BehaviorSubject<ICovidSummary>({
     Message: '',
@@ -26,17 +37,14 @@ export class CovidApiService  implements ICovidApiSrv {
   })
   varSummary = this.covidSummary.asObservable()
 
-  refreshData(summary: ICovidSummary): void {
-    this.covidSummary.next(summary)
-    const item = new Object() as ICovidSummary
-    item.Message = this.covidSummary.value.Message
-    item.Global.NewConfirmed = this.covidSummary.value.Global.NewConfirmed
-    item.Global.NewDeaths = this.covidSummary.value.Global.NewDeaths
-    item.Global.NewRecovered = this.covidSummary.value.Global.NewRecovered
-    item.Global.TotalConfirmed = this.covidSummary.value.Global.TotalConfirmed
-    item.Global.TotalDeaths = this.covidSummary.value.Global.TotalDeaths
-    item.Global.TotalRecovered = this.covidSummary.value.Global.TotalRecovered
-    item.Countries = this.covidSummary.value.Countries
-    //this.templates.value.files.push(item)
+  refreshData(): void {
+    this.getSummary().subscribe(adat => this.covidSummary.next(adat));
+  }
+
+  getSummary(): Observable<ICovidSummary> {
+    const apiUrl = `${environment.baseUrl}`;
+    const result = this.http.get<ICovidSummary>(apiUrl, { headers: this.headers })
+      .pipe(map((data =>  data)));
+    return result;
   }
 }

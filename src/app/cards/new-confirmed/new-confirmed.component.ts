@@ -10,9 +10,11 @@ import { CovidApiService } from '../../services/covid-api.service';
 export class NewConfirmedComponent implements OnInit {
   item!: ICovidSummary;
 
-  constructor(private covidApiSrv: CovidApiService) { }
+  constructor(private covidApiSrv: CovidApiService) {    
+  }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.covidApiSrv.refreshData();
     this.covidApiSrv.varSummary.subscribe((data) => (this.item = data))
   }
 }

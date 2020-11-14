@@ -17,7 +17,7 @@ export class CovidRestService implements IRestService {
   headers = new HttpHeaders();
   covidSummary!: ICovidSummary;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(public http: HttpClient) {
     this.headers.append('Accept', 'application/json');
     this.headers.append('Access-Control-Allow-Headers', 'Origin, Accept, Authorization, X-Requested-With, Content-Type');
     this.headers.append('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT, HEAD, OPTIONS');
@@ -26,7 +26,8 @@ export class CovidRestService implements IRestService {
 
   getSummary(): Observable<ICovidSummary> {
     const apiUrl = `${environment.baseUrl}`;
-    return this.httpClient.get<ICovidSummary>(apiUrl, { headers: this.headers })
+    const result = this.http.get<ICovidSummary>(apiUrl, { headers: this.headers })
       .pipe(map((data) => (this.covidSummary = data)));
+    return result;
   }
 }
