@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { HttpClient, HttpHandler } from '@angular/common/http';
+import { CovidRestService } from './services/covid-rest.service';
 
 @Component({
   selector: 'app-root',
@@ -7,8 +9,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Covid stats';
-  atDate = Date.now();
+  atDate = Date.toString;
 
-  ngOnInit() {
+  constructor() {
+    const handler = HttpHandler();
+    const httpClient = new HttpClient(handler);
+    const covidRestService = new CovidRestService(httpClient);
+    covidRestService.getSummary();
   }
 }

@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,7 +12,8 @@ import { TotalDeathsComponent } from './cards/total-deaths/total-deaths.componen
 import { NewDeathsComponent } from './cards/new-deaths/new-deaths.component';
 import { NewRecoveredComponent } from './cards/new-recovered/new-recovered.component';
 import { TotalRecoveredComponent } from './cards/total-recovered/total-recovered.component';
-
+import { CovidRestService } from './services/covid-rest.service'
+import { CovidApiService } from './services/covid-api.service'
 
 @NgModule({
   declarations: [
@@ -33,7 +33,7 @@ import { TotalRecoveredComponent } from './cards/total-recovered/total-recovered
     MatSliderModule,
     MatToolbarModule
   ],
-  providers: [],
+  providers: [CovidRestService, CovidApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
