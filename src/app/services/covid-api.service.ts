@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ICovidSummary } from '../interfaces/icovidsummary';
 
 export interface ICovidApiSrv {
-  refreshData(summary: ICovidSummary): void
+  refreshData(): void
 }
 
 @Injectable({
@@ -15,7 +15,7 @@ export interface ICovidApiSrv {
 })
 export class CovidApiService  implements ICovidApiSrv {
   headers = new HttpHeaders();
-
+  
   constructor(public http: HttpClient) {
     this.headers.append('Accept', 'application/json');
     this.headers.append('Access-Control-Allow-Headers', 'Origin, Accept, Authorization, X-Requested-With, Content-Type');

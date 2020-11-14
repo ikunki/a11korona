@@ -16,6 +16,10 @@ import { TotalRecoveredComponent } from './cards/total-recovered/total-recovered
 import { CovidRestService } from './services/covid-rest.service'
 import { CovidApiService } from './services/covid-api.service'
 import { HttpClientModule } from '@angular/common/http';
+import { MinTotalConfirmedComponent } from './cards/min-total-confirmed/min-total-confirmed.component';
+import { MaxTotalConfirmedComponent } from './cards/max-total-confirmed/max-total-confirmed.component';
+import { MinTotalDeathsComponent } from './cards/min-total-deaths/min-total-deaths.component';
+import { MaxTotalDeathsComponent } from './cards/max-total-deaths/max-total-deaths.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,11 @@ import { HttpClientModule } from '@angular/common/http';
     TotalDeathsComponent,
     NewDeathsComponent,
     NewRecoveredComponent,
-    TotalRecoveredComponent
+    TotalRecoveredComponent,
+    MinTotalConfirmedComponent,
+    MaxTotalConfirmedComponent,
+    MinTotalDeathsComponent,
+    MaxTotalDeathsComponent
   ],
   imports: [
     BrowserModule,
