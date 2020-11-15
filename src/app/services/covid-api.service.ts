@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ICovidSummary } from '../interfaces/icovidsummary';
+import { ICovidSummary, ICountryData } from '../interfaces/icovidsummary';
 
 export interface ICovidApiSrv {
   refreshData(): void
@@ -35,16 +35,26 @@ export class CovidApiService  implements ICovidApiSrv {
       },
     Countries: []
   })
-  varSummary = this.covidSummary.asObservable()
+  varSummary = this.covidSummary.asObservable();
 
-  refreshData(): void {
-    this.getSummary().subscribe(adat => this.covidSummary.next(adat));
+  private countryList = new BehaviorSubject<ICountryData[]>([]);
+  varCountries = this.countryList.asObservable();
+
+  async refreshData(): Promise<void> {
+    this.getSummary().subscribe(data => this.covidSummary.next(data));
+    (await this.getCountries()).subscribe(data => this.countryList.next(data));
+    console.log('varCountries ', this.varCountries);
   }
 
   getSummary(): Observable<ICovidSummary> {
     const apiUrl = `${environment.baseUrl}`;
     const result = this.http.get<ICovidSummary>(apiUrl, { headers: this.headers })
-      .pipe(map((data =>  data)));
+      .pipe(map((data => data)));
+    return result;
+  }
+
+  async getCountries(): Promise<Observable<ICountryData[]>> {
+    const result = this.varSummary.pipe(map((data => data.Countries)));
     return result;
   }
 }

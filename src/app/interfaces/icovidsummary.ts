@@ -27,17 +27,17 @@ export interface ICovidSummary {
 }
 
 export interface ITotalMinConfirmed extends ICountryData {
-    getTotalMinConfirmed(summary: ICovidSummary): ICountryData; 
+    getTotalMinConfirmed(countries: ICountryData[]): ICountryData; 
 }
 
 export interface ITotalMinDeaths extends ICountryData {
-    getTotalMinDeaths(summary: ICovidSummary): ICountryData; 
+    getTotalMinDeaths(countries: ICountryData[]): ICountryData; 
 }
 
 export interface ITotalMaxConfirmed extends ICountryData {
-    getTotalMaxConfirmed(summary: ICovidSummary): ICountryData; 
+    getTotalMaxConfirmed(countries: ICountryData[]): ICountryData; 
 }
 
 export interface ITotalMaxDeaths extends ICountryData {
-    getTotalMaxDeaths(summary: ICovidSummary): ICountryData; 
+    getTotalMaxDeaths(countries: ICountryData[]): ICountryData; 
 }

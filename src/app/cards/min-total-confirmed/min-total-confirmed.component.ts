@@ -14,29 +14,29 @@ class TotalMinConfirmed implements ITotalMinConfirmed {
   TotalDeaths: number;
   TotalRecovered: number;
 
-  getTotalMinConfirmed(summary: ICovidSummary): ICountryData {
-    let data: ICountryData = this.getFirstCountryData(summary);
-    for (let item of summary.Countries) {
+  getTotalMinConfirmed(countries: ICountryData[]): ICountryData {
+    console.log('list ', countries);
+    let data: ICountryData = this.getFirstCountryData(countries);
+    for (let item of countries) {
       if (item.TotalConfirmed < data.TotalConfirmed)
         data = item;
     }
-    console.log('getTotalMinConfirmed', data);
     return data;
   } 
 
-  private getFirstCountryData(summary: ICovidSummary): ICountryData {
-    console.log('getFirstCountryData', summary.Countries[0]);
+  private getFirstCountryData(countries: ICountryData[]): ICountryData {
+    console.log('1st ', countries[0]);
     let data: ICountryData = {
-      Country: summary.Countries[0].Country,
-      CountryCode: summary.Countries[0].CountryCode,
-      Date: summary.Countries[0].Date,
-      Slug: summary.Countries[0].Slug,
-      NewConfirmed: summary.Countries[0].NewConfirmed,
-      NewDeaths: summary.Countries[0].NewDeaths,
-      NewRecovered: summary.Countries[0].NewRecovered,
-      TotalConfirmed: summary.Countries[0].TotalConfirmed,
-      TotalDeaths: summary.Countries[0].TotalDeaths,
-      TotalRecovered: summary.Countries[0].TotalRecovered
+      Country: countries[0].Country,
+      CountryCode: countries[0].CountryCode,
+      Date: countries[0].Date,
+      Slug: countries[0].Slug,
+      NewConfirmed: countries[0].NewConfirmed,
+      NewDeaths: countries[0].NewDeaths,
+      NewRecovered: countries[0].NewRecovered,
+      TotalConfirmed: countries[0].TotalConfirmed,
+      TotalDeaths: countries[0].TotalDeaths,
+      TotalRecovered: countries[0].TotalRecovered
     };
     return data;
   }
@@ -76,6 +76,7 @@ class TotalMinConfirmed implements ITotalMinConfirmed {
 export class MinTotalConfirmedComponent implements OnInit {
   item!: ICovidSummary;
   countryData!: ICountryData;
+  countryList!: ICountryData[];
   totalMinConfirmed!: TotalMinConfirmed;
 
   constructor(private covidApiSrv: CovidApiService) {
@@ -85,6 +86,7 @@ export class MinTotalConfirmedComponent implements OnInit {
   async ngOnInit() {
     this.covidApiSrv.refreshData();
     this.covidApiSrv.varSummary.subscribe((data) => (this.item = data));
-    this.countryData = this.totalMinConfirmed.getTotalMinConfirmed(this.item);
+    this.covidApiSrv.varCountries.subscribe((data) => (this.countryList = data));
+    this.countryData = this.totalMinConfirmed.getTotalMinConfirmed(this.countryList);
   }
 }
