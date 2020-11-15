@@ -7,6 +7,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTableModule } from '@angular/material/table';
+//import { MatPaginator } from '@angular/material/paginator';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NewConfirmedComponent } from './cards/new-confirmed/new-confirmed.component';
@@ -20,7 +21,7 @@ import { MinTotalConfirmedComponent } from './cards/min-total-confirmed/min-tota
 import { MaxTotalConfirmedComponent } from './cards/max-total-confirmed/max-total-confirmed.component';
 import { MinTotalDeathsComponent } from './cards/min-total-deaths/min-total-deaths.component';
 import { MaxTotalDeathsComponent } from './cards/max-total-deaths/max-total-deaths.component';
-import { StatsAllCountriesComponent } from './current/stats-all-countries/stats-all-countries.component';
+import { StatsAllCountriesComponent } from './current/stats-all-countries.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { StatsAllCountriesComponent } from './current/stats-all-countries/stats-
     MaxTotalConfirmedComponent,
     MinTotalDeathsComponent,
     MaxTotalDeathsComponent,
-    StatsAllCountriesComponent
+    StatsAllCountriesComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,7 +47,8 @@ import { StatsAllCountriesComponent } from './current/stats-all-countries/stats-
     MatSliderModule,
     MatToolbarModule,
     MatDividerModule,
-    MatTableModule
+    MatTableModule,
+    //MatPaginator
   ],
   providers: [CovidApiService],
   bootstrap: [AppComponent]
