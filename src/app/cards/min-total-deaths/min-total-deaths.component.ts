@@ -20,7 +20,7 @@ import { ITotalMinDeaths, TotalMinDeaths } from '../../interfaces/itotalmindeath
   styleUrls: ['./min-total-deaths.component.css']
 })
 export class MinTotalDeathsComponent implements OnInit {
-  covidSummary!: ICovidSummary;
+  summary!: ICovidSummary;
   countryData!: ICountryData;
   countryList!: ICountryData[];
   totalMinDeaths!: TotalMinDeaths;
@@ -31,7 +31,7 @@ export class MinTotalDeathsComponent implements OnInit {
 
   async ngOnInit() {
     await this.covidApiSrv.refreshData();
-    await this.covidApiSrv.varSummary.subscribe(data => (this.covidSummary = data));
+    await this.covidApiSrv.varSummary.subscribe(data => (this.summary = data));
     await this.covidApiSrv.varCountries.subscribe(data => (this.countryList = data));
     this.countryData = this.totalMinDeaths.getTotalMinDeaths(this.countryList);
   }

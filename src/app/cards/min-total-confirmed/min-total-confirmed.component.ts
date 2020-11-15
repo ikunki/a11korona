@@ -20,7 +20,7 @@ import { ITotalMinConfirmed, TotalMinConfirmed } from '../../interfaces/itotalmi
   styleUrls: ['./min-total-confirmed.component.css']
 })
 export class MinTotalConfirmedComponent implements OnInit {
-  covidSummary!: ICovidSummary;
+  summary!: ICovidSummary;
   countryData!: ICountryData;
   countryList!: ICountryData[];
   totalMinConfirmed!: TotalMinConfirmed;
@@ -31,7 +31,7 @@ export class MinTotalConfirmedComponent implements OnInit {
 
   async ngOnInit() {
     await this.covidApiSrv.refreshData();
-    await this.covidApiSrv.varSummary.subscribe(data => (this.covidSummary = data));
+    await this.covidApiSrv.varSummary.subscribe(data => (this.summary = data));
     await this.covidApiSrv.varCountries.subscribe(data => (this.countryList = data));
     this.countryData = this.totalMinConfirmed.getTotalMinConfirmed(this.countryList);
   }

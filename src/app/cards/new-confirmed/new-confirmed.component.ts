@@ -5,18 +5,18 @@ import { CovidApiService } from '../../services/covid-api.service';
 @Component({
   selector: 'app-new-confirmed',
   template: `<div>
-  <p>Count: {{ item.Global.NewConfirmed }}</p>
+  <p>Count: {{ summary.Global.NewConfirmed }}</p>
   </div>`,
   styleUrls: ['./new-confirmed.component.css']
 })
 export class NewConfirmedComponent implements OnInit {
-  item!: ICovidSummary;
+  summary!: ICovidSummary;
 
   constructor(private covidApiSrv: CovidApiService) {    
   }
 
   async ngOnInit() {
-    this.covidApiSrv.refreshData();
-    this.covidApiSrv.varSummary.subscribe((data) => (this.item = data));
+    await this.covidApiSrv.refreshData();
+    this.covidApiSrv.varSummary.subscribe(data => (this.summary = data));
   }
 }
