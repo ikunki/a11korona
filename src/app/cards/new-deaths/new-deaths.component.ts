@@ -16,7 +16,7 @@ export class NewDeathsComponent implements OnInit {
   }
 
   async ngOnInit() {
-    await this.covidApiSrv.refreshData();
-    this.covidApiSrv.varSummary.subscribe((data) => (this.summary = data));
+    const summary$ = this.covidApiSrv.getSummary();
+    this.summary = await summary$.toPromise();
   }
 }

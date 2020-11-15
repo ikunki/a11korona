@@ -20,6 +20,7 @@ Against each entry have the country name as a link
 On selecting a country name from the table, display the country’s New Confirmed, Total Confirmed, New Deaths, Total Deaths, New Recovered, Total Recovered and history details (past 20 days) in the modal dialog. 
 The day where Total Deaths were maximum
 The day where Total Confirmed cases were maximum
+
 Share code using any private repository(Bitbucket, GitHub), or upload to Google drive, drop box or send it in an email with instructions
 Bonus points – use charts where possible
 -----------------------------------------------------------------------------------

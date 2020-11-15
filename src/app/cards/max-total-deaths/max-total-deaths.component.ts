@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CovidApiService } from '../../services/covid-api.service';
 import { ICovidSummary, ICountryData } from '../../interfaces/icovidsummary';
-import { ITotalMaxDeaths, TotalMaxDeaths } from '../../interfaces/itotalmaxdeaths';
+import { TotalMaxDeaths } from '../../interfaces/itotalmaxdeaths';
 
 @Component({
   selector: 'app-max-total-deaths',
@@ -20,19 +20,18 @@ import { ITotalMaxDeaths, TotalMaxDeaths } from '../../interfaces/itotalmaxdeath
   styleUrls: ['./max-total-deaths.component.css']
 })
 export class MaxTotalDeathsComponent implements OnInit {
-  summary!: ICovidSummary;
   countryData!: ICountryData;
-  countryList!: ICountryData[];
-  totalMaxDeaths!: TotalMaxDeaths;
+  summary!: ICovidSummary;
 
   constructor(private covidApiSrv: CovidApiService) {
-    this.totalMaxDeaths = new TotalMaxDeaths();
   }
 
   async ngOnInit() {
-    await this.covidApiSrv.refreshData();
-    await this.covidApiSrv.varSummary.subscribe(data => (this.summary = data));
-    await this.covidApiSrv.varCountries.subscribe(data => (this.countryList = data));
-    this.countryData = this.totalMaxDeaths.getTotalMaxDeaths(this.countryList);
+    const summary$$$ = this.covidApiSrv.getSummary();
+    this.summary = await summary$$$.toPromise();
+    const countries = this.summary.Countries;
+    const totalMaxDeaths: TotalMaxDeaths = new TotalMaxDeaths();
+    this.countryData = totalMaxDeaths.getTotalMaxDeaths(countries);
+    console.log('TotalMaxDeaths-countryData ', this.countryData);
   }
 }

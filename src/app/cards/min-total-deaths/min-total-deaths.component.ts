@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CovidApiService } from '../../services/covid-api.service';
 import { ICovidSummary, ICountryData } from '../../interfaces/icovidsummary';
-import { ITotalMinDeaths, TotalMinDeaths } from '../../interfaces/itotalmindeaths';
+import {  TotalMinDeaths } from '../../interfaces/itotalmindeaths';
 
 @Component({
   selector: 'app-min-total-deaths',
@@ -20,19 +20,19 @@ import { ITotalMinDeaths, TotalMinDeaths } from '../../interfaces/itotalmindeath
   styleUrls: ['./min-total-deaths.component.css']
 })
 export class MinTotalDeathsComponent implements OnInit {
-  summary!: ICovidSummary;
   countryData!: ICountryData;
-  countryList!: ICountryData[];
-  totalMinDeaths!: TotalMinDeaths;
+  summary!: ICovidSummary;
+
 
   constructor(private covidApiSrv: CovidApiService) {
-    this.totalMinDeaths = new TotalMinDeaths();
   }
 
   async ngOnInit() {
-    await this.covidApiSrv.refreshData();
-    await this.covidApiSrv.varSummary.subscribe(data => (this.summary = data));
-    await this.covidApiSrv.varCountries.subscribe(data => (this.countryList = data));
-    this.countryData = this.totalMinDeaths.getTotalMinDeaths(this.countryList);
+    const summary$$$ = this.covidApiSrv.getSummary();
+    this.summary = await summary$$$.toPromise();
+    const countries = this.summary.Countries;
+    const totalMinDeaths: TotalMinDeaths = new TotalMinDeaths();
+    this.countryData = totalMinDeaths.getTotalMinDeaths(countries);
+    console.log('TotalMinDeaths-countryData ', this.countryData);
   }
 }

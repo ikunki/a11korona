@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CovidApiService } from '../../services/covid-api.service';
 import { ICovidSummary, ICountryData } from '../../interfaces/icovidsummary';
-import { ITotalMaxConfirmed, TotalMaxConfirmed } from '../../interfaces/itotalmaxconfirmed';
+import { TotalMaxConfirmed } from '../../interfaces/itotalmaxconfirmed';
 
 @Component({
   selector: 'app-max-total-confirmed',
@@ -20,19 +20,18 @@ import { ITotalMaxConfirmed, TotalMaxConfirmed } from '../../interfaces/itotalma
   styleUrls: ['./max-total-confirmed.component.css']
 })
 export class MaxTotalConfirmedComponent implements OnInit {
-  summary!: ICovidSummary;
   countryData!: ICountryData;
-  countryList!: ICountryData[];
-  totalMaxConfirmed!: TotalMaxConfirmed;
+  summary!: ICovidSummary;
 
   constructor(private covidApiSrv: CovidApiService) {
-    this.totalMaxConfirmed = new TotalMaxConfirmed();
   }
 
   async ngOnInit() {
-    await this.covidApiSrv.refreshData();
-    await this.covidApiSrv.varSummary.subscribe(data => (this.summary = data));
-    await this.covidApiSrv.varCountries.subscribe(data => (this.countryList = data));
-    this.countryData = this.totalMaxConfirmed.getTotalMaxConfirmed(this.countryList);
+    const summary$$$ = this.covidApiSrv.getSummary();
+    this.summary = await summary$$$.toPromise();
+    const countries = this.summary.Countries;
+    const totalMaxConfirmed: TotalMaxConfirmed = new TotalMaxConfirmed();
+    this.countryData = totalMaxConfirmed.getTotalMaxConfirmed(countries);
+    console.log('TotalMaxConfirmed-countryData ', this.countryData);
   }
 }
