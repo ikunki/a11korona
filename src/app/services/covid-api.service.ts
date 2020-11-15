@@ -54,7 +54,7 @@ export class CovidApiService  implements ICovidApiSrv {
   }
 
   async getCountries(): Promise<Observable<ICountryData[]>> {
-    const result = this.varSummary.pipe(map((data => data.Countries)));
+    const result = await this.varSummary.pipe(map((data => data.Countries)));
     return result;
   }
 }

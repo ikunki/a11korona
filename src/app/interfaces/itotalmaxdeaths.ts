@@ -17,7 +17,6 @@ export class TotalMaxDeaths implements ITotalMaxDeaths {
     TotalRecovered: number;
   
     getTotalMaxDeaths(countries: ICountryData[]): ICountryData {
-      console.log('list ', countries);
       let data: ICountryData = this.getFirstCountryData(countries);
       for (let item of countries) {
         if (item.TotalDeaths > data.TotalDeaths)
@@ -27,7 +26,6 @@ export class TotalMaxDeaths implements ITotalMaxDeaths {
     }
   
     private getFirstCountryData(countries: ICountryData[]): ICountryData {
-      console.log('1st ', countries[0]);
       let data: ICountryData = {
         Country: countries[0].Country,
         CountryCode: countries[0].CountryCode,
@@ -43,18 +41,18 @@ export class TotalMaxDeaths implements ITotalMaxDeaths {
       return data;
     }
   
-    constructor(Country: string = '', CountryCode: string = '', Date: string = '', Slug: string = '',
-      NewConfirmed: number = 0, NewDeaths: number = 0, NewRecovered: number = 0,
-      TotalConfirmed: number = 0, TotalDeaths: number = 0, TotalRecovered: number = 0) { 
-      this.Country = Country;
-      this.CountryCode = CountryCode;
-      this.Date = Date;
-      this.Slug = Slug;
-      this.NewConfirmed = NewConfirmed;
-      this.NewDeaths = NewDeaths;
-      this.NewRecovered = NewRecovered;
-      this.TotalConfirmed = TotalConfirmed;
-      this.TotalDeaths = TotalDeaths;
-      this.TotalRecovered = TotalRecovered;
+    constructor(country: string = '', countryCode: string = '', date: string = '', slug: string = '',
+      newConfirmed: number = 0, newDeaths: number = 0, newRecovered: number = 0,
+      totalConfirmed: number = 0, totalDeaths: number = 0, totalRecovered: number = 0) { 
+      this.Country = country;
+      this.CountryCode = countryCode;
+      this.Date = date;
+      this.Slug = slug;
+      this.NewConfirmed = newConfirmed;
+      this.NewDeaths = newDeaths;
+      this.NewRecovered = newRecovered;
+      this.TotalConfirmed = totalConfirmed;
+      this.TotalDeaths = totalDeaths;
+      this.TotalRecovered = totalRecovered;
     }
 }
