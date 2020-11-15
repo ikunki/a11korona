@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ICovidSummary, ICountryData } from '../interfaces/icovidsummary';
 
 export interface ICovidApiSrv {
-  refreshData(): void
+  refreshData(): Promise<void>;
 }
 
 @Injectable({
@@ -41,12 +41,12 @@ export class CovidApiService  implements ICovidApiSrv {
   varCountries = this.countryList.asObservable();
 
   async refreshData(): Promise<void> {
-    this.getSummary().subscribe(data => this.covidSummary.next(data));
+    (await this.getSummary()).subscribe(data => this.covidSummary.next(data));
     (await this.getCountries()).subscribe(data => this.countryList.next(data));
     console.log('varCountries ', this.varCountries);
   }
 
-  getSummary(): Observable<ICovidSummary> {
+  async getSummary(): Promise<Observable<ICovidSummary>> {
     const apiUrl = `${environment.baseUrl}`;
     const result = this.http.get<ICovidSummary>(apiUrl, { headers: this.headers })
       .pipe(map((data => data)));

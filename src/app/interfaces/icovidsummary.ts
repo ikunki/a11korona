@@ -1,3 +1,9 @@
+export interface ICovidSummary {
+    Message: string,
+    Global: IGlobal,
+    Countries: ICountryData[]
+}
+
 export interface IGlobal {
     NewConfirmed: number,
     NewDeaths: number,
@@ -18,26 +24,4 @@ export interface ICountryData {
     TotalConfirmed: number,
     TotalDeaths: number,
     TotalRecovered: number
-}
-
-export interface ICovidSummary {
-    Message: string,
-    Global: IGlobal,
-    Countries: ICountryData[]
-}
-
-export interface ITotalMinConfirmed extends ICountryData {
-    getTotalMinConfirmed(countries: ICountryData[]): ICountryData; 
-}
-
-export interface ITotalMinDeaths extends ICountryData {
-    getTotalMinDeaths(countries: ICountryData[]): ICountryData; 
-}
-
-export interface ITotalMaxConfirmed extends ICountryData {
-    getTotalMaxConfirmed(countries: ICountryData[]): ICountryData; 
-}
-
-export interface ITotalMaxDeaths extends ICountryData {
-    getTotalMaxDeaths(countries: ICountryData[]): ICountryData; 
 }
