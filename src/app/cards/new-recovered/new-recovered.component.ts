@@ -4,7 +4,9 @@ import { CovidApiService } from '../../services/covid-api.service';
 
 @Component({
   selector: 'app-new-recovered',
-  template: `<p>{{ item.Global.NewRecovered }}</p>`,
+  template: `<div>
+  <p>Count: {{ item.Global.NewRecovered }}</p>
+  </div>`,
   styleUrls: ['./new-recovered.component.css']
 })
 export class NewRecoveredComponent implements OnInit {
@@ -15,6 +17,6 @@ export class NewRecoveredComponent implements OnInit {
 
   async ngOnInit() {
     this.covidApiSrv.refreshData();
-    this.covidApiSrv.varSummary.subscribe((data) => (this.item = data))
+    this.covidApiSrv.varSummary.subscribe((data) => (this.item = data));
   }
 }

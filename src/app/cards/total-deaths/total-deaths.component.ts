@@ -4,7 +4,9 @@ import { CovidApiService } from '../../services/covid-api.service';
 
 @Component({
   selector: 'app-total-deaths',
-  template: `<p>{{ item.Global.TotalDeaths }}</p>`,
+  template: `<div>
+  <p>Count: {{ item.Global.TotalDeaths }}</p>
+  </div>`,
   styleUrls: ['./total-deaths.component.css']
 })
 export class TotalDeathsComponent implements OnInit {
@@ -15,6 +17,6 @@ export class TotalDeathsComponent implements OnInit {
 
   async ngOnInit() {
     this.covidApiSrv.refreshData();
-    this.covidApiSrv.varSummary.subscribe((data) => (this.item = data))
+    this.covidApiSrv.varSummary.subscribe((data) => (this.item = data));
   }
 }

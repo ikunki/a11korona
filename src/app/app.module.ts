@@ -13,8 +13,7 @@ import { TotalDeathsComponent } from './cards/total-deaths/total-deaths.componen
 import { NewDeathsComponent } from './cards/new-deaths/new-deaths.component';
 import { NewRecoveredComponent } from './cards/new-recovered/new-recovered.component';
 import { TotalRecoveredComponent } from './cards/total-recovered/total-recovered.component';
-import { CovidRestService } from './services/covid-rest.service'
-import { CovidApiService } from './services/covid-api.service'
+import { CovidApiService } from './services/covid-api.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MinTotalConfirmedComponent } from './cards/min-total-confirmed/min-total-confirmed.component';
 import { MaxTotalConfirmedComponent } from './cards/max-total-confirmed/max-total-confirmed.component';
@@ -45,7 +44,7 @@ import { MaxTotalDeathsComponent } from './cards/max-total-deaths/max-total-deat
     MatToolbarModule,
     MatDividerModule
   ],
-  providers: [CovidRestService, CovidApiService],
+  providers: [CovidApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
