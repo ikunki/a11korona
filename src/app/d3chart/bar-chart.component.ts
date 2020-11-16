@@ -1,8 +1,8 @@
 import * as d3 from 'd3';
 import { Component, OnInit, ElementRef, Input, OnChanges, ViewChild, ViewEncapsulation } from '@angular/core';
-import { ICovidSummary } from '../../interfaces/icovidsummary';
-import { CovidApiService } from '../../services/covid-api.service';
-import { IBarChart } from '../../interfaces/ibarchart';
+import { ICovidSummary } from '../interfaces/icovidsummary';
+import { CovidApiService } from '../services/covid-api.service';
+import { IBarChart } from '../interfaces/ibarchart';
 
 @Component({
   selector: 'app-bar-chart',
@@ -19,7 +19,16 @@ export class BarChartComponent implements OnInit, OnChanges {
   margin = {top: 20, right: 20, bottom: 30, left: 40};
 
   constructor(private covidApiSrv: CovidApiService) {    
-    this.barData = [];
+    this.barData = [
+      {
+        "letter": "A",
+        "frequency": 0.08167
+      },
+      {
+        "letter": "B",
+        "frequency": 0.01492
+      }
+    ];
   }
 
   async ngOnInit() {
@@ -36,8 +45,8 @@ export class BarChartComponent implements OnInit, OnChanges {
 
   private createChart(): void {
     d3.select('svg').remove();
-    const element = this.chartContainer.nativeElement;
     const barData = this.barData;
+    const element = this.chartContainer.nativeElement;
     const svg = d3.select(element).append('svg')
         .attr('width', element.offsetWidth)
         .attr('height', element.offsetHeight);
@@ -51,33 +60,24 @@ export class BarChartComponent implements OnInit, OnChanges {
 
     const y = d3.scaleLinear()
       .rangeRound([contentHeight, 0])
-      .domain([0, d3.max(barData, d => +d.frequency)]);
+      .domain([0, 1]);
+      //.domain([0, d3.max(barData, d => +d.frequency)]); /////////////////////////
 
     let dataViz = svg.append('g')
       .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')');
 
-    dataViz.append('g')
-      .attr('class', 'axis axis--x')
+    dataViz.append('g').attr('class', 'axis axis--x')
       .attr('transform', 'translate(0,' + contentHeight + ')')
       .call(d3.axisBottom(x));
 
-    dataViz.append('g')
-      .attr('class', 'axis axis--y')
+    dataViz.append('g').attr('class', 'axis axis--y')
       .call(d3.axisLeft(y).ticks(10, '%'))
-      .append('text')
-        .attr('transform', 'rotate(-90)')
-        .attr('y', 6)
-        .attr('dy', '0.71em')
-        .attr('text-anchor', 'end')
-        .text('Frequency');
+      .append('text').attr('transform', 'rotate(-90)').attr('y', 6)
+      .attr('dy', '0.71em').attr('text-anchor', 'end').text('Frequency');
 
-    dataViz.selectAll('.bar')
-      .data(barData)
-      .enter().append('rect')
-        .attr('class', 'bar')
-        .attr('x', d => x(d.letter))
-        .attr('y', d => y(d.frequency))
-        .attr('width', x.bandwidth())
-        .attr('height', d => contentHeight - y(d.frequency));
+    dataViz.select('.bar').data(barData).enter()
+      .append('rect').attr('class', 'bar').attr('x', d => x(d.letter))
+      .attr('y', d => y(+d.frequency)).attr('width', x.bandwidth())
+      .attr('height', d => contentHeight - y(+d.frequency));
   }
 }

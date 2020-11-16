@@ -1,24 +1,38 @@
-import {AfterViewInit, Component, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 //import {MatPaginator} from '@angular/material/paginator';
+import { CovidApiService } from '../services/covid-api.service';
+import { ICovidSummary, ICountryData } from '../interfaces/icovidsummary';
 
 @Component({
   selector: 'app-stats-all-countries',
   templateUrl: './stats-all-countries.component.html',
   styleUrls: ['./stats-all-countries.component.css']
 })
-export class StatsAllCountriesComponent implements AfterViewInit {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+export class StatsAllCountriesComponent implements OnInit, AfterViewInit {
+  countries!: ICountryData[];
+  summary!: ICovidSummary;
+  displayedColumns: string[] = ['Country', 'CountryCode', 'Date', 'Slug', 'NewConfirmed', 'NewDeaths', 'NewRecovered', 'TotalConfirmed', 'TotalDeaths', 'TotalRecovered'];
+  dataSource = new MatTableDataSource<ICountryData>(this.countries);
 
   //@ViewChild(MatPaginator)
   //paginator!: MatPaginator;
+
+  constructor(private covidApiSrv: CovidApiService) {
+  }
+
+  async ngOnInit() {
+    const summary$$$ = this.covidApiSrv.getSummary();
+    this.summary = await summary$$$.toPromise();
+    const countries = this.summary.Countries;
+  }
 
   ngAfterViewInit() {
     //this.dataSource.paginator = this.paginator;
   }
 }
 
+/*
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -48,3 +62,4 @@ const ELEMENT_DATA: PeriodicElement[] = [
   {position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K'},
   {position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca'},
 ];
+*/

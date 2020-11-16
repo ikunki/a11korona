@@ -33,7 +33,7 @@ export class CovidApiService  implements ICovidApiSrv {
   }
 
   getBarData(): Observable<IBarChart[]> {
-    const result = this.http.get<IBarChart[]>('data/data.json')
+    const result = this.http.get<IBarChart[]>('assets/data.json')
       .pipe(map((data => data)));
     return result;
   }
