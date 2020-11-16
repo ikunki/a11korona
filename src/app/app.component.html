@@ -9,6 +9,15 @@
   <section>
     <mat-card class="example-card">
       <mat-card-header>
+        <mat-card-title>Bar Chart of New Covid-19</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <app-bar-chart></app-bar-chart>
+      </mat-card-content>
+    </mat-card>
+    <mat-divider></mat-divider>
+    <mat-card class="example-card">
+      <mat-card-header>
         <mat-card-title>Globally New Confirmed</mat-card-title>
       </mat-card-header>
       <mat-card-content>
@@ -31,6 +40,15 @@
       </mat-card-header>
       <mat-card-content>
         <app-new-recovered></app-new-recovered>
+      </mat-card-content>
+    </mat-card>
+    <mat-divider></mat-divider>
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>Bar Chart of Total Covid-19</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <app-bar-chart></app-bar-chart>
       </mat-card-content>
     </mat-card>
     <mat-divider></mat-divider>
@@ -96,11 +114,16 @@
         <app-max-total-deaths></app-max-total-deaths>
       </mat-card-content>
     </mat-card>
-  </section>
-  <mat-divider></mat-divider>
-  <mat-divider></mat-divider>
-  <section>
-    <app-stats-all-countries></app-stats-all-countries>
+    <mat-divider></mat-divider>
+    <mat-divider></mat-divider>
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>All Countries Stats</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <app-stats-all-countries></app-stats-all-countries>
+      </mat-card-content>
+    </mat-card>
   </section>
 </div>
 

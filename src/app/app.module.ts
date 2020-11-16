@@ -22,6 +22,7 @@ import { MaxTotalConfirmedComponent } from './cards/max-total-confirmed/max-tota
 import { MinTotalDeathsComponent } from './cards/min-total-deaths/min-total-deaths.component';
 import { MaxTotalDeathsComponent } from './cards/max-total-deaths/max-total-deaths.component';
 import { StatsAllCountriesComponent } from './current/stats-all-countries.component';
+import { BarChartComponent } from './d3chart/bar-chart/bar-chart.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { StatsAllCountriesComponent } from './current/stats-all-countries.compon
     MinTotalDeathsComponent,
     MaxTotalDeathsComponent,
     StatsAllCountriesComponent,
+    BarChartComponent,
   ],
   imports: [
     BrowserModule,
