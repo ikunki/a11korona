@@ -1,22 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { ICovidSummary } from '../../interfaces/icovidsummary';
-import { CovidApiService } from '../../services/covid-api.service';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-new-confirmed',
   template: `<div>
-  <p>Count: {{ summary.Global.NewConfirmed }}</p>
+  <p>Count: {{ newConfirmed }}</p>
   </div>`,
   styleUrls: ['./new-confirmed.component.css']
 })
-export class NewConfirmedComponent implements OnInit {
-  summary!: ICovidSummary;
+export class NewConfirmedComponent {
+  @Input() newConfirmed!: number;
 
-  constructor(private covidApiSrv: CovidApiService) {    
-  }
-
-  async ngOnInit() {
-    const summary$ = this.covidApiSrv.getSummary();
-    this.summary = await summary$.toPromise();
+  constructor() {    
   }
 }

@@ -1,37 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { CovidApiService } from '../../services/covid-api.service';
-import { ICovidSummary, ICountryData } from '../../interfaces/icovidsummary';
-import { TotalMaxConfirmed } from '../../interfaces/itotalmaxconfirmed';
+import { Component, Input } from '@angular/core';
+import { ICountryData } from '../../interfaces/icovidsummary';
 
 @Component({
   selector: 'app-max-total-confirmed',
   template: `<div>
-  <p>Country: {{ countryData.Country }}</p>
-  <p>CountryCode: {{ countryData.CountryCode }}</p>
-  <p>Date: {{ countryData.Date }}</p>
-  <p>Slug: {{ countryData.Slug }}</p>
-  <p>NewConfirmed: {{ countryData.NewConfirmed }}</p>
-  <p>NewDeaths: {{ countryData.NewDeaths }}</p>
-  <p>NewRecovered: {{ countryData.NewRecovered }}</p>
-  <p>TotalConfirmed: {{ countryData.TotalConfirmed }}</p>
-  <p>TotalDeaths: {{ countryData.TotalDeaths }}</p>
-  <p>TotalRecovered: {{ countryData.TotalRecovered }}</p>
+  <p>Country: {{ maxTotalConfirmed.Country }}</p>
+  <p>CountryCode: {{ maxTotalConfirmed.CountryCode }}</p>
+  <p>Date: {{ maxTotalConfirmed.Date }}</p>
+  <p>Slug: {{ maxTotalConfirmed.Slug }}</p>
+  <p>NewConfirmed: {{ maxTotalConfirmed.NewConfirmed }}</p>
+  <p>NewDeaths: {{ maxTotalConfirmed.NewDeaths }}</p>
+  <p>NewRecovered: {{ maxTotalConfirmed.NewRecovered }}</p>
+  <p>TotalConfirmed: {{ maxTotalConfirmed.TotalConfirmed }}</p>
+  <p>TotalDeaths: {{ maxTotalConfirmed.TotalDeaths }}</p>
+  <p>TotalRecovered: {{ maxTotalConfirmed.TotalRecovered }}</p>
 <div>`,
   styleUrls: ['./max-total-confirmed.component.css']
 })
-export class MaxTotalConfirmedComponent implements OnInit {
-  countryData!: ICountryData;
-  summary!: ICovidSummary;
+export class MaxTotalConfirmedComponent {
+  @Input() maxTotalConfirmed!: ICountryData;
 
-  constructor(private covidApiSrv: CovidApiService) {
-  }
-
-  async ngOnInit() {
-    const summary$$$ = this.covidApiSrv.getSummary();
-    this.summary = await summary$$$.toPromise();
-    const countries = this.summary.Countries;
-    const totalMaxConfirmed: TotalMaxConfirmed = new TotalMaxConfirmed();
-    this.countryData = totalMaxConfirmed.getTotalMaxConfirmed(countries);
-    console.log('TotalMaxConfirmed-countryData ', this.countryData);
+  constructor() {
   }
 }

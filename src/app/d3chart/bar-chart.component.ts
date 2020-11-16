@@ -75,9 +75,11 @@ export class BarChartComponent implements OnInit, OnChanges {
       .append('text').attr('transform', 'rotate(-90)').attr('y', 6)
       .attr('dy', '0.71em').attr('text-anchor', 'end').text('Frequency');
 
+    /*
     dataViz.select('.bar').data(barData).enter()
       .append('rect').attr('class', 'bar').attr('x', d => x(d.letter))
       .attr('y', d => y(+d.frequency)).attr('width', x.bandwidth())
       .attr('height', d => contentHeight - y(+d.frequency));
+    */
   }
 }

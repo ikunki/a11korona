@@ -1,22 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { ICovidSummary } from '../../interfaces/icovidsummary';
-import { CovidApiService } from '../../services/covid-api.service';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-total-deaths',
   template: `<div>
-  <p>Count: {{ summary.Global.TotalDeaths }}</p>
+  <p>Count: {{ totalDeaths }}</p>
   </div>`,
   styleUrls: ['./total-deaths.component.css']
 })
-export class TotalDeathsComponent implements OnInit {
-  summary!: ICovidSummary;
+export class TotalDeathsComponent {
+  @Input() totalDeaths!: number;
 
-  constructor(private covidApiSrv: CovidApiService) {    
-  }
-
-  async ngOnInit() {
-    const summary$ = this.covidApiSrv.getSummary();
-    this.summary = await summary$.toPromise();
+  constructor() {    
   }
 }
