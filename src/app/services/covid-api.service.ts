@@ -4,11 +4,11 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ICovidSummary } from '../interfaces/icovidsummary';
+import { ISummary } from '../interfaces/icovidsummary';
 import { ICountry, ICountriesInfo } from '../interfaces/icountry';
 
 export interface ICovidApiSrv {
-  getSummary(): Observable<ICovidSummary>;
+  getSummary(): Observable<ISummary>;
   getCountries(pageSize: number, searchText: string, pagesToSkip: number): Observable<ICountriesInfo>;
 }
 
@@ -25,9 +25,9 @@ export class CovidApiService  implements ICovidApiSrv {
     this.headers.append('Access-Control-Allow-Origin', '*');
   }
 
-  getSummary(): Observable<ICovidSummary> {
+  getSummary(): Observable<ISummary> {
     const apiUrl = `${environment.baseUrl}/summary`;
-    const result = this.http.get<ICovidSummary>(apiUrl, { headers: this.headers })
+    const result = this.http.get<ISummary>(apiUrl, { headers: this.headers })
       .pipe(map((data => data)));
     return result;
   }
@@ -47,7 +47,7 @@ export class CovidApiService  implements ICovidApiSrv {
   }
 }
 /*
-  private covidSummary = new BehaviorSubject<ICovidSummary>({
+  private covidSummary = new BehaviorSubject<ISummary>({
     Message: '',
     Global: {
       NewConfirmed: 0,

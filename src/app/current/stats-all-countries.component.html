@@ -6,16 +6,16 @@
         <input matInput placeholder="Search" aria-label="Search" [formControl]="search" />
         <mat-hint>Search by name</mat-hint>
         <mat-error *ngIf="search.invalid">
-          Type more than one character to search COUNTRY
+          To search for COUNTRY type at least 2 characters
         </mat-error>
       </mat-form-field>
     </div>
   </form>
 </div>
 <div class="mat-elevation-z8">
-  <div class="loading-shade" *ngIf="isLoadingResults">
-    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
-    <div class="error" *ngIf="hasError">
+  <div class="loading-shade" *ngIf="_isLoadingResults">
+    <mat-spinner *ngIf="_isLoadingResults"></mat-spinner>
+    <div class="error" *ngIf="_hasError">
       {{ errorText }}
     </div>
   </div>

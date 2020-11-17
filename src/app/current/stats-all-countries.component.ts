@@ -1,6 +1,6 @@
-import {AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
-import {MatPaginator} from '@angular/material/paginator';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 import { FormControl } from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
 import { merge, of } from 'rxjs';
@@ -21,9 +21,9 @@ export class StatsAllCountriesComponent implements AfterViewInit {
   _hasError = false;
   errorText = '';
   _skipLoading = false;
-  search = new FormControl('', OptionalTextValidation);
-  @ViewChild(MatPaginator, null) paginator: MatPaginator; //-------------- , null
-  @ViewChild(MatSort, null) sort: MatSort; //-------------- , null
+  search = new FormControl('', null);
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private covidApiSrv: CovidApiService) {}
   ngOnInit() {}

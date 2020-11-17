@@ -1,4 +1,4 @@
-export interface ICovidSummary {
+export interface ISummary {
     Message: string,
     Global: IGlobal,
     Countries: ICountryData[]

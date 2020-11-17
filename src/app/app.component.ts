@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CovidApiService } from './services/covid-api.service';
-import { ICovidSummary, IGlobal, ICountryData } from './interfaces/icovidsummary';
+import { ISummary, IGlobal, ICountryData } from './interfaces/icovidsummary';
 import { TotalMaxConfirmed } from './interfaces/itotalmaxconfirmed';
 import { TotalMaxDeaths } from './interfaces/itotalmaxdeaths';
 import { TotalMinConfirmed } from './interfaces/itotalminconfirmed';
@@ -12,7 +12,7 @@ import { TotalMinDeaths } from './interfaces/itotalmindeaths';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  summary!: ICovidSummary;
+  summary!: ISummary;
   //summaryGlobal!: IGlobal;
   countries!: ICountryData[];
   maxTotalConfirmed!: ICountryData;

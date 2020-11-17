@@ -7,7 +7,12 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTableModule } from '@angular/material/table';
-//import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -53,7 +58,13 @@ import { BarChartTotalComponent } from './charts/globallytotal/bar-chart-total.c
     MatToolbarModule,
     MatDividerModule,
     MatTableModule,
-    //MatPaginator,
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatProgressSpinnerModule,
+    FormsModule,
+    ReactiveFormsModule,
     ChartsModule
   ],
   providers: [CovidApiService],
