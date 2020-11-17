@@ -17,12 +17,12 @@ export class StatsAllCountriesComponent implements AfterViewInit {
   //paginator!: MatPaginator;
 
   constructor() {
-    if (this.countries) {
-      this.dataSource = new MatTableDataSource<ICountryData>(this.countries);
-    }
   }
 
   ngAfterViewInit() {
+    if (this.countries) {
+      this.dataSource = new MatTableDataSource<ICountryData>(this.countries);
+    }
     //this.dataSource.paginator = this.paginator;
   }
 }

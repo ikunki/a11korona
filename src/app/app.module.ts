@@ -8,6 +8,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTableModule } from '@angular/material/table';
 //import { MatPaginator } from '@angular/material/paginator';
+import { ChartsModule } from 'ng2-charts';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NewConfirmedComponent } from './cards/new-confirmed/new-confirmed.component';
@@ -22,7 +23,8 @@ import { MaxTotalConfirmedComponent } from './cards/max-total-confirmed/max-tota
 import { MinTotalDeathsComponent } from './cards/min-total-deaths/min-total-deaths.component';
 import { MaxTotalDeathsComponent } from './cards/max-total-deaths/max-total-deaths.component';
 import { StatsAllCountriesComponent } from './current/stats-all-countries.component';
-import { BarChartComponent } from './d3chart/bar-chart.component';
+import { BarChartNewComponent } from './charts/globallynew/bar-chart-new.component';
+import { BarChartTotalComponent } from './charts/globallytotal/bar-chart-total.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { BarChartComponent } from './d3chart/bar-chart.component';
     MinTotalDeathsComponent,
     MaxTotalDeathsComponent,
     StatsAllCountriesComponent,
-    BarChartComponent,
+    BarChartNewComponent,
+    BarChartTotalComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,8 @@ import { BarChartComponent } from './d3chart/bar-chart.component';
     MatToolbarModule,
     MatDividerModule,
     MatTableModule,
-    //MatPaginator
+    //MatPaginator,
+    ChartsModule
   ],
   providers: [CovidApiService],
   bootstrap: [AppComponent]

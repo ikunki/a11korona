@@ -36,6 +36,15 @@
     <mat-divider></mat-divider>
     <mat-card class="example-card">
       <mat-card-header>
+        <mat-card-title>Bar Chart of New Covid-19</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <app-bar-chart-new [summaryGlobal]="summary.Global"></app-bar-chart-new>
+      </mat-card-content>
+    </mat-card>
+    <mat-divider></mat-divider>
+    <mat-card class="example-card">
+      <mat-card-header>
         <mat-card-title>Globally Total Confirmed</mat-card-title>
       </mat-card-header>
       <mat-card-content>
@@ -58,6 +67,15 @@
       </mat-card-header>
       <mat-card-content>
         <app-total-recovered [totalRecovered]="summary.Global.TotalRecovered"></app-total-recovered>
+      </mat-card-content>
+    </mat-card>
+    <mat-divider></mat-divider>
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>Bar Chart of Total Covid-19</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <app-bar-chart-total [summaryGlobal]="summary.Global"></app-bar-chart-total>
       </mat-card-content>
     </mat-card>
     <mat-divider></mat-divider>
@@ -97,33 +115,12 @@
       </mat-card-content>
     </mat-card>
     <mat-divider></mat-divider>
-    <mat-card class="example-card">
-      <mat-card-header>
-        <mat-card-title>Bar Chart of New Covid-19</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <app-bar-chart></app-bar-chart>
-      </mat-card-content>
-    </mat-card>
-    <mat-divider></mat-divider>
-    <mat-card class="example-card">
-      <mat-card-header>
-        <mat-card-title>Bar Chart of Total Covid-19</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <app-bar-chart></app-bar-chart>
-      </mat-card-content>
-    </mat-card>
     <mat-divider></mat-divider>
     <mat-divider></mat-divider>
-    <mat-card class="example-card">
-      <mat-card-header>
-        <mat-card-title>All Countries Covid-19 Stats</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <app-stats-all-countries [countries]="countries"></app-stats-all-countries>
-      </mat-card-content>
-    </mat-card>
+    <div class="example-card">
+      <p>All Countries Covid-19 Stats</p>
+      <app-stats-all-countries [countries]="countries"></app-stats-all-countries>
+    </div>
   </section>
 </div>
 
