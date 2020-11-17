@@ -4,12 +4,16 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ICovidSummary } from '../interfaces/icovidsummary';
-import { IBarChart } from '../interfaces/ibarchart';
+import { ICovidSummary, ICountryData } from '../interfaces/icovidsummary';
+
+export interface ICountries {
+  items: ICountryData[]
+  total: number
+}
 
 export interface ICovidApiSrv {
   getSummary(): Observable<ICovidSummary>;
-  getBarData(): Observable<IBarChart[]>;
+  getCountries(pageSize: number, searchText: string, pagesToSkip: number): Observable<ICountries>;
 }
 
 @Injectable({
@@ -32,9 +36,16 @@ export class CovidApiService  implements ICovidApiSrv {
     return result;
   }
 
-  getBarData(): Observable<IBarChart[]> {
-    const result = this.http.get<IBarChart[]>('assets/data.json')
-      .pipe(map((data => data)));
+  getCountries(pageSize: number, searchText: string, pagesToSkip: number): Observable<ICountries> {
+    const apiUrl = `${environment.baseUrl}`;
+    const result = this.http.get<ICovidSummary>(apiUrl, { headers: this.headers,
+      params: {
+        search: searchText,
+        offset: pagesToSkip.toString(),
+        limit: pageSize.toString(),
+      },
+    })
+      .pipe(map((data => { data.Countries, 0 })));
     return result;
   }
 }
