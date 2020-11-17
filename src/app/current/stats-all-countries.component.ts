@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { FormControl } from '@angular/forms';
@@ -13,7 +13,7 @@ import { ICountry, ICountriesInfo } from '../interfaces/icountry';
   templateUrl: './stats-all-countries.component.html',
   styleUrls: ['./stats-all-countries.component.css']
 })
-export class StatsAllCountriesComponent implements AfterViewInit {
+export class StatsAllCountriesComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['Country', 'ISO2', 'Slug'];
   dataSource = new MatTableDataSource<ICountry>();
   resultsLength = 0;
@@ -22,11 +22,10 @@ export class StatsAllCountriesComponent implements AfterViewInit {
   _hasError = false;
   errorText = '';
   search = new FormControl('', null);
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private covidApiSrv: CovidApiService) {
-    this.sort = new MatSort();
+  constructor(private covidApiSrv: CovidApiService, private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -58,10 +57,11 @@ export class StatsAllCountriesComponent implements AfterViewInit {
         return of([]);
       })
     ).subscribe((data) => (this.dataSource.data = data));
-    this.dataSource.sort = this.sort;
+    this.cdr.detectChanges();
   }
 
   ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
     if (this._skipLoading) {
