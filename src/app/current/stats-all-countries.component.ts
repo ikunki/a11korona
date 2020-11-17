@@ -15,40 +15,37 @@ import { ICountry, ICountriesInfo } from '../interfaces/icountry';
 })
 export class StatsAllCountriesComponent implements AfterViewInit {
   displayedColumns: string[] = ['Country', 'ISO2', 'Slug'];
-  dataSource = new MatTableDataSource();
+  dataSource = new MatTableDataSource<ICountry>();
   resultsLength = 0;
   _isLoadingResults = true;
+  _skipLoading = false;
   _hasError = false;
   errorText = '';
-  _skipLoading = false;
   search = new FormControl('', null);
+  @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private covidApiSrv: CovidApiService) {}
-  ngOnInit() {}
+  constructor(private covidApiSrv: CovidApiService) {
+    this.sort = new MatSort();
+  }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator
-    this.dataSource.sort = this.sort
-    this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0))
-    if (this._skipLoading) {
-      return
-    }
-    merge(
-      this.sort.sortChange,
-      this.paginator.page,
+  ngOnInit() {
+    merge(this.sort.sortChange, this.paginator.page,
       this.search.valueChanges.pipe(debounceTime(1000))
     ).pipe(startWith({}),
-      switchMap(() => {
+    switchMap(async () => {
         this._isLoadingResults = true;
-        return this.covidApiSrv.getCountries(
+        const info$ = this.covidApiSrv.getCountries(
           this.paginator.pageSize,
           this.search.value,
           this.paginator.pageIndex
-        )
+        );
+        const info = await info$.toPromise();
+        console.log('Info: ', info);
+        return info;
       }),
-      map((data: { Countries: ICountry[]; Count: number }) => {
+      map((data: ICountriesInfo) => {
+        console.log('CountriesInfo: ', data);
         this._isLoadingResults = false;
         this._hasError = false;
         this.resultsLength = data.Count;
@@ -61,5 +58,15 @@ export class StatsAllCountriesComponent implements AfterViewInit {
         return of([]);
       })
     ).subscribe((data) => (this.dataSource.data = data));
+    this.dataSource.sort = this.sort;
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
+    if (this._skipLoading) {
+      return;
+    }
   }
 }
+//{ Countries: ICountry[]; Count: number }

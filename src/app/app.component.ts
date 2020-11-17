@@ -13,7 +13,7 @@ import { TotalMinDeaths } from './interfaces/itotalmindeaths';
 })
 export class AppComponent implements OnInit {
   summary!: ISummary;
-  //summaryGlobal!: IGlobal;
+  summaryGlobal!: IGlobal;
   countries!: ICountryData[];
   maxTotalConfirmed!: ICountryData;
   maxTotalDeaths!: ICountryData;
@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
     this.minTotalConfirmed = totalMinConfirmed.getTotalMinConfirmed(countries);
     const totalMinDeaths: TotalMinDeaths = new TotalMinDeaths();
     this.minTotalDeaths = totalMinDeaths.getTotalMinDeaths(countries);
-    //this.summaryGlobal = this.summary.Global;
-    //console.log(this.summaryGlobal);
+    this.summaryGlobal = this.summary.Global;
+    console.log(this.summaryGlobal);
   }
 }

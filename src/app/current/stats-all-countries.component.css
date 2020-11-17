@@ -1,3 +1,17 @@
 table {
     width: 100%;
 }
+  
+th.mat-sort-header-sorted {
+color: black;
+}
+
+.filter-row {
+    min-height: 64px;
+    padding: 8px 24px 0;
+}
+
+.full-width {
+    width: 100%
+}
+  
