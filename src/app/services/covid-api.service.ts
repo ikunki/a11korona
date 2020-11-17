@@ -1,19 +1,15 @@
 import 'cors';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ICovidSummary, ICountryData } from '../interfaces/icovidsummary';
-
-export interface ICountries {
-  items: ICountryData[]
-  total: number
-}
+import { ICovidSummary } from '../interfaces/icovidsummary';
+import { ICountry, ICountriesInfo } from '../interfaces/icountry';
 
 export interface ICovidApiSrv {
   getSummary(): Observable<ICovidSummary>;
-  getCountries(pageSize: number, searchText: string, pagesToSkip: number): Observable<ICountries>;
+  getCountries(pageSize: number, searchText: string, pagesToSkip: number): Observable<ICountriesInfo>;
 }
 
 @Injectable({
@@ -30,23 +26,24 @@ export class CovidApiService  implements ICovidApiSrv {
   }
 
   getSummary(): Observable<ICovidSummary> {
-    const apiUrl = `${environment.baseUrl}`;
+    const apiUrl = `${environment.baseUrl}/summary`;
     const result = this.http.get<ICovidSummary>(apiUrl, { headers: this.headers })
       .pipe(map((data => data)));
     return result;
   }
 
-  getCountries(pageSize: number, searchText: string, pagesToSkip: number): Observable<ICountries> {
-    const apiUrl = `${environment.baseUrl}`;
-    const result = this.http.get<ICovidSummary>(apiUrl, { headers: this.headers,
+  getCountries(pageSize: number, searchText = '', pagesToSkip = 0): Observable<ICountriesInfo> {
+    let countriesInfo: ICountriesInfo = { Countries: [], Count: 0} ;
+    const apiUrl = `${environment.baseUrl}/countries`;
+    const result = this.http.get<ICountry[]>(apiUrl, { headers: this.headers,
       params: {
         search: searchText,
         offset: pagesToSkip.toString(),
         limit: pageSize.toString(),
       },
     })
-      .pipe(map((data => { data.Countries, 0 })));
-    return result;
+    .pipe(map((data => {countriesInfo.Countries = data , countriesInfo.Count = data.length})));
+    return of(countriesInfo);
   }
 }
 /*

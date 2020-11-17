@@ -6,7 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { merge, of } from 'rxjs';
 import { debounceTime, startWith, switchMap, map, catchError } from 'rxjs/operators';
 import { CovidApiService } from '../services/covid-api.service';
-import { ICountryData } from '../interfaces/icovidsummary';
+import { ICountry, ICountriesInfo } from '../interfaces/icountry';
 
 @Component({
   selector: 'app-stats-all-countries',
@@ -49,12 +49,11 @@ export class StatsAllCountriesComponent implements AfterViewInit {
           this.paginator.pageIndex
         )
       }),
-      //map((data: { total: number; items: ICountryData[] }) => {
-      map((data: { items: ICountryData[] }) => {
+      map((data: { Countries: ICountry[]; Count: number;  }) => {
         this._isLoadingResults = false,
         this._hasError = false,
-        //this.resultsLength = data.total,
-        return data.items
+        this.resultsLength = data.Count,
+        return data.Countries
       }),
       catchError((err) => {
         this._isLoadingResults = false
