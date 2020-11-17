@@ -49,7 +49,7 @@ export class StatsAllCountriesComponent implements AfterViewInit {
           this.paginator.pageIndex
         )
       }),
-      map((data: { Countries: ICountry[]; Count: number;  }) => {
+      map((data: { Countries: ICountry[]; Count: number }) => {
         this._isLoadingResults = false,
         this._hasError = false,
         this.resultsLength = data.Count,
