@@ -1,7 +1,7 @@
 export interface ICountry {
     Country: string,
+    ISO2: string,
     Slug: string,
-    ISO2: string
 }
 
 export interface ICountriesInfo {

@@ -14,8 +14,7 @@ import { ICountry, ICountriesInfo } from '../interfaces/icountry';
   styleUrls: ['./stats-all-countries.component.css']
 })
 export class StatsAllCountriesComponent implements AfterViewInit {
-  displayedColumns: string[] = ['Country', 'CountryCode', 'Date', 'Slug', 'NewConfirmed', 'NewDeaths', 'NewRecovered', 'TotalConfirmed', 'TotalDeaths', 'TotalRecovered'];
-  //countries!: ICountryData[];
+  displayedColumns: string[] = ['Country', 'ISO2', 'Slug'];
   dataSource = new MatTableDataSource();
   resultsLength = 0;
   _isLoadingResults = true;
@@ -42,7 +41,7 @@ export class StatsAllCountriesComponent implements AfterViewInit {
       this.search.valueChanges.pipe(debounceTime(1000))
     ).pipe(startWith({}),
       switchMap(() => {
-        this._isLoadingResults = true,
+        this._isLoadingResults = true;
         return this.covidApiSrv.getCountries(
           this.paginator.pageSize,
           this.search.value,
@@ -50,17 +49,17 @@ export class StatsAllCountriesComponent implements AfterViewInit {
         )
       }),
       map((data: { Countries: ICountry[]; Count: number }) => {
-        this._isLoadingResults = false,
-        this._hasError = false,
-        this.resultsLength = data.Count,
-        return data.Countries
+        this._isLoadingResults = false;
+        this._hasError = false;
+        this.resultsLength = data.Count;
+        return data.Countries;
       }),
       catchError((err) => {
-        this._isLoadingResults = false
-        this._hasError = true
-        this.errorText = err
-        return of([])
+        this._isLoadingResults = false;
+        this._hasError = true;
+        this.errorText = err;
+        return of([]);
       })
-    ).subscribe((data) => (this.dataSource.data = data))
+    ).subscribe((data) => (this.dataSource.data = data));
   }
 }
