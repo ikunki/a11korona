@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, ChangeDetectorRef, Input } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { FormControl } from '@angular/forms';
@@ -14,6 +14,7 @@ import { ICountry, ICountriesInfo } from '../interfaces/icountry';
   styleUrls: ['./stats-all-countries.component.css']
 })
 export class StatsAllCountriesComponent implements OnInit, AfterViewInit {
+  @Input() countriesList!: ICountriesInfo;
   displayedColumns: string[] = ['Country', 'ISO2', 'Slug'];
   dataSource = new MatTableDataSource<ICountry>();
   resultsLength = 0;
@@ -22,8 +23,8 @@ export class StatsAllCountriesComponent implements OnInit, AfterViewInit {
   _hasError = false;
   errorText = '';
   search = new FormControl('', null);
-  @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort, {}) sort!: MatSort;
+  @ViewChild(MatPaginator, {}) paginator!: MatPaginator;
 
   constructor(private covidApiSrv: CovidApiService, private cdr: ChangeDetectorRef) {
   }

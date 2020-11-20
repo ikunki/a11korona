@@ -116,11 +116,16 @@
     </mat-card>
     <mat-divider></mat-divider>
     <mat-divider></mat-divider>
-    <div class="example-card">
-      <p>All Countries</p>
-      <app-stats-all-countries></app-stats-all-countries>
-    </div>
-  </section>
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>List of Countries</mat-card-title>
+      </mat-card-header>
+      <mat-card-content  *ngIf="countriesList">
+      <app-stats-all-countries [countriesList]="countriesList"></app-stats-all-countries>
+    </mat-card-content>
+  </mat-card>
+  <mat-divider></mat-divider>
+</section>
 </div>
 
 <router-outlet></router-outlet>
