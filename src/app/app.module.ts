@@ -5,6 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -56,6 +58,8 @@ import { BarChartTotalComponent } from './charts/globallytotal/bar-chart-total.c
     MatCardModule,
     MatSliderModule,
     MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
     MatDividerModule,
     MatTableModule,
     MatPaginatorModule,

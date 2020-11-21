@@ -30,7 +30,8 @@ export class StatsAllCountriesComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    merge(this.sort.sortChange, this.paginator.page,
+    //merge(this.sort.sortChange, this.paginator.page,
+    merge(0, 0,
       this.search.valueChanges.pipe(debounceTime(1000))
     ).pipe(startWith({}),
     switchMap(async () => {
@@ -64,10 +65,15 @@ export class StatsAllCountriesComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
+    //this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
     if (this._skipLoading) {
       return;
     }
   }
+
+  public customSort = (event: any) => {
+    console.log(event);
+  }
+  
 }
 //{ Countries: ICountry[]; Count: number }

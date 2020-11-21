@@ -19,7 +19,7 @@
       {{ errorText }}
     </div>
   </div>
-  <mat-table [dataSource]="dataSource" matSort>
+  <mat-table [dataSource]="dataSource" matSort matSortStart="desc" (matSortChange)="customSort($event)">
     <ng-container matColumnDef="Country">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Country </mat-header-cell>
       <mat-cell *matCellDef="let row"> {{ row.Country }} </mat-cell>
