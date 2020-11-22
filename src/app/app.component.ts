@@ -42,6 +42,7 @@ export class AppComponent implements OnInit {
     this.minTotalConfirmed = totalMinConfirmed.getTotalMinConfirmed(summaryCountries);
     const totalMinDeaths: TotalMinDeaths = new TotalMinDeaths();
     this.minTotalDeaths = totalMinDeaths.getTotalMinDeaths(summaryCountries);
+    //console.log('summaryGlobal ', this.summaryGlobal);
   }
 }
   //countriesList!: ICountriesInfo;

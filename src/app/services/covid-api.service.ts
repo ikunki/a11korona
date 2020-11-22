@@ -4,11 +4,12 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ISummary } from '../interfaces/icovidsummary';
+import { IGlobal, ISummary } from '../interfaces/icovidsummary';
 import { ICountry, ICountriesInfo } from '../interfaces/icountry';
 
 export interface ICovidApiSrv {
   getSummary(): Observable<ISummary>;
+  getGlobalInfo(): Observable<IGlobal>;
   getCountries(): Observable<ICountry[]>;
   getCountriesInfo(pageSize: number, searchText: string, pagesToSkip: number): Observable<ICountriesInfo>;
 }
@@ -30,6 +31,13 @@ export class CovidApiService  implements ICovidApiSrv {
     const apiUrl = `${environment.baseUrl}/summary`;
     const result = this.http.get<ISummary>(apiUrl, { headers: this.headers })
       .pipe(map((data => data)));
+    return result;
+  }
+
+  getGlobalInfo(): Observable<IGlobal> {
+    const apiUrl = `${environment.baseUrl}/summary`;
+    const result = this.http.get<ISummary>(apiUrl, { headers: this.headers })
+      .pipe(map((data => data.Global)));
     return result;
   }
 

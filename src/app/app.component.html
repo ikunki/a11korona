@@ -1,8 +1,8 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <button mat-icon-button>
-      <!-- <mat-icon (click)="sidenav.toggle()">menu</mat-icon> -->
-    </button>
+    <!-- <button mat-icon-button>
+      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+    </button> -->
     <span class="menu-spacer"></span>
     <div>
       <a mat-button [routerLink]="'/accounts'"> Globally New </a>
@@ -67,15 +67,6 @@
       </mat-card-content>
     </mat-card>
     <mat-divider></mat-divider>
-    <!-- <mat-card class="example-card">
-      <mat-card-header>
-        <mat-card-title>Bar Chart of New Covid-19</mat-card-title>
-      </mat-card-header>
-      <mat-card-content *ngIf="summaryGlobal">
-        <app-bar-chart-new [summaryGlobal]="summaryGlobal"></app-bar-chart-new>
-      </mat-card-content>
-    </mat-card> -->
-    <mat-divider></mat-divider>
     <mat-card class="example-card">
       <mat-card-header>
         <mat-card-title>Globally Total Confirmed</mat-card-title>
@@ -102,15 +93,6 @@
         <app-total-recovered [totalRecovered]="summaryGlobal.TotalRecovered"></app-total-recovered>
       </mat-card-content>
     </mat-card>
-    <mat-divider></mat-divider>
-    <!-- <mat-card class="example-card">
-      <mat-card-header>
-        <mat-card-title>Bar Chart of Total Covid-19</mat-card-title>
-      </mat-card-header>
-      <mat-card-content *ngIf="summaryGlobal">
-        <app-bar-chart-total [summaryGlobal]="summaryGlobal"></app-bar-chart-total>
-      </mat-card-content>
-    </mat-card> -->
     <mat-divider></mat-divider>
     <mat-card class="example-card">
       <mat-card-header>
@@ -158,6 +140,24 @@
       </mat-card-content>
   </mat-card>
   <mat-divider></mat-divider>
+  <mat-divider></mat-divider>
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>Bar Chart of New Covid-19</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <app-bar-chart-new></app-bar-chart-new>
+    </mat-card-content>
+  </mat-card>
+  <mat-divider></mat-divider>
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>Bar Chart of Total Covid-19</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <app-bar-chart-total></app-bar-chart-total>
+    </mat-card-content>
+  </mat-card>
 </section>
 </div>
 

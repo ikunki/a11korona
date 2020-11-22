@@ -28,7 +28,7 @@ export class CountryListComponent implements OnInit, AfterViewInit {
     this.apiService.getCountries()
     .subscribe((res: ICountry[]) => {
       this.dataSource.data = res as ICountry[];
-    })
+    });
   }
 
   ngAfterViewInit(): void {
@@ -45,5 +45,6 @@ export class CountryListComponent implements OnInit, AfterViewInit {
   }
 
   public redirectToDetails = (id: string) => {
+    // megjeleniteni egy felugro ablakkban !!!
   }
 }
