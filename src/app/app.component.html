@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <button mat-icon-button>
-      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+      <!-- <mat-icon (click)="sidenav.toggle()">menu</mat-icon> -->
     </button>
     <span class="menu-spacer"></span>
     <div>
@@ -16,7 +16,7 @@
     <span style="font-size: 12px;">Global Covid-19 statistics on day {{ dateStr }}</span>
   </mat-toolbar-row>
 </mat-toolbar>
-
+<!-- 
 <mat-sidenav-container>
   <mat-sidenav #sidenav>
     <mat-nav-list>
@@ -34,7 +34,7 @@
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
-
+ -->
 <mat-slider min="1" max="100" step="1" value="1"></mat-slider>
 
 <div class="content" role="main">
@@ -153,9 +153,9 @@
       <mat-card-header>
         <mat-card-title>List of Countries</mat-card-title>
       </mat-card-header>
-      <mat-card-content  *ngIf="countriesList">
-      <app-stats-all-countries [countriesList]="countriesList"></app-stats-all-countries>
-    </mat-card-content>
+      <mat-card-content>
+        <app-country-list></app-country-list>
+      </mat-card-content>
   </mat-card>
   <mat-divider></mat-divider>
 </section>

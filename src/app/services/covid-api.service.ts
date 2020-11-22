@@ -9,7 +9,8 @@ import { ICountry, ICountriesInfo } from '../interfaces/icountry';
 
 export interface ICovidApiSrv {
   getSummary(): Observable<ISummary>;
-  getCountries(pageSize: number, searchText: string, pagesToSkip: number): Observable<ICountriesInfo>;
+  getCountries(): Observable<ICountry[]>;
+  getCountriesInfo(pageSize: number, searchText: string, pagesToSkip: number): Observable<ICountriesInfo>;
 }
 
 @Injectable({
@@ -32,7 +33,14 @@ export class CovidApiService  implements ICovidApiSrv {
     return result;
   }
 
-  getCountries(pageSize: number, searchText = '', pagesToSkip = 0): Observable<ICountriesInfo> {
+  getCountries(): Observable<ICountry[]> {
+    const apiUrl = `${environment.baseUrl}/countries`;
+    const result = this.http.get<ICountry[]>(apiUrl, { headers: this.headers })
+      .pipe(map((data => data)));
+    return result;
+  }
+
+  getCountriesInfo(pageSize: number, searchText = '', pagesToSkip = 0): Observable<ICountriesInfo> {
     let countriesInfo: ICountriesInfo = { Countries: [], Count: 0} ;
     const apiUrl = `${environment.baseUrl}/countries`;
     const result = this.http.get<ICountry[]>(apiUrl, { headers: this.headers,
@@ -45,9 +53,10 @@ export class CovidApiService  implements ICovidApiSrv {
     .pipe(map((data => {countriesInfo.Countries = data , countriesInfo.Count = data.length})));
     return of(countriesInfo);
   }
+
 }
 /*
-  private covidSummary = new BehaviorSubject<ISummary>({
+private covidSummary = new BehaviorSubject<ISummary>({
     Message: '',
     Global: {
       NewConfirmed: 0,

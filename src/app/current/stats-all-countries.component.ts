@@ -36,7 +36,7 @@ export class StatsAllCountriesComponent implements OnInit, AfterViewInit {
     ).pipe(startWith({}),
     switchMap(async () => {
         this._isLoadingResults = true;
-        const info$ = this.covidApiSrv.getCountries(
+        const info$ = this.covidApiSrv.getCountriesInfo(
           this.paginator.pageSize,
           this.search.value,
           this.paginator.pageIndex

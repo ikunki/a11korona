@@ -5,7 +5,6 @@ import { TotalMaxConfirmed } from './interfaces/itotalmaxconfirmed';
 import { TotalMaxDeaths } from './interfaces/itotalmaxdeaths';
 import { TotalMinConfirmed } from './interfaces/itotalminconfirmed';
 import { TotalMinDeaths } from './interfaces/itotalmindeaths';
-import { CountriesInfo, ICountriesInfo } from './interfaces/icountry';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +14,6 @@ import { CountriesInfo, ICountriesInfo } from './interfaces/icountry';
 export class AppComponent implements OnInit {
   summary!: ISummary;
   summaryGlobal!: IGlobal;
-  countriesList!: ICountriesInfo;
   maxTotalConfirmed!: ICountryData;
   maxTotalDeaths!: ICountryData;
   minTotalConfirmed!: ICountryData;
@@ -44,11 +42,12 @@ export class AppComponent implements OnInit {
     this.minTotalConfirmed = totalMinConfirmed.getTotalMinConfirmed(summaryCountries);
     const totalMinDeaths: TotalMinDeaths = new TotalMinDeaths();
     this.minTotalDeaths = totalMinDeaths.getTotalMinDeaths(summaryCountries);
-    const countriesList$ = this.covidApiSrv.getCountries(100);
-    this.countriesList = await countriesList$.toPromise();
-    const countriesInfo: CountriesInfo = new CountriesInfo();
-    const infoCount = countriesInfo.getCountInfo(this.countriesList);
-    console.log('infoCount', infoCount);
-    console.log(this.countriesList);
   }
 }
+  //countriesList!: ICountriesInfo;
+    //const countriesList$ = this.covidApiSrv.getCountries(100);
+    //this.countriesList = await countriesList$.toPromise();
+    //const countriesInfo: CountriesInfo = new CountriesInfo();
+    //const infoCount = countriesInfo.getCountInfo(this.countriesList);
+    //console.log('infoCount', infoCount);
+    //console.log(this.countriesList);

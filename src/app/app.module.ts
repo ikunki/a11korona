@@ -32,6 +32,7 @@ import { MaxTotalDeathsComponent } from './cards/max-total-deaths/max-total-deat
 import { StatsAllCountriesComponent } from './current/stats-all-countries.component';
 import { BarChartNewComponent } from './charts/globallynew/bar-chart-new.component';
 import { BarChartTotalComponent } from './charts/globallytotal/bar-chart-total.component';
+import { CountryListComponent } from './tables/country-list.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { BarChartTotalComponent } from './charts/globallytotal/bar-chart-total.c
     MaxTotalDeathsComponent,
     StatsAllCountriesComponent,
     BarChartNewComponent,
-    BarChartTotalComponent
+    BarChartTotalComponent,
+    CountryListComponent
   ],
   imports: [
     BrowserModule,
