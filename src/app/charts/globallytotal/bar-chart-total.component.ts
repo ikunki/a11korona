@@ -8,7 +8,7 @@ import { IGlobal } from '../../interfaces/icovidsummary';
   template: `
     <div class="chart-wrapper">
       <canvas baseChart 
-        [datasets]="barChartData"
+        [datasets]="dsOfTotal"
         [labels]="barChartLabels"
         [options]="barChartOptions"
         [plugins]="barChartPlugins"
@@ -20,9 +20,9 @@ import { IGlobal } from '../../interfaces/icovidsummary';
   styleUrls: ['./bar-chart-total.component.css']
 })
 export class BarChartTotalComponent implements OnInit {
-  barChartData!: ChartDataSets[];
-  globalInfo!: IGlobal;
+  dsOfTotal: ChartDataSets[] = [];
   numbers: number[] = [];
+  globalInfo!: IGlobal;
   barChartOptions: ChartOptions = { responsive: true };
   barChartLabels: Label[] = ['Confirmed', 'Deaths', 'Recoverd'];
   barChartType: ChartType = 'bar';
@@ -32,13 +32,11 @@ export class BarChartTotalComponent implements OnInit {
   constructor(private covidApiSrv: CovidApiService) { }
 
   async set3numbers() {
-    this.numbers[0] = this.globalInfo.NewConfirmed;
-    this.numbers[1] = this.globalInfo.NewDeaths;
-    this.numbers[2] = this.globalInfo.NewRecovered;
-    this.barChartData = [
-      { data: this.numbers, label: 'Globally New' }
-    ];
-    console.log('barChartData ', this.barChartData);
+    this.numbers[0] = this.globalInfo.TotalConfirmed;
+    this.numbers[1] = this.globalInfo.TotalDeaths;
+    this.numbers[2] = this.globalInfo.TotalRecovered;
+    this.dsOfTotal = [{ data: this.numbers, label: 'Total Global Covid-19' }];
+    //console.log('dsOfTotal ', this.dsOfTotal);
   }
 
   async ngOnInit() {

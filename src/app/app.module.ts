@@ -14,6 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
 import { AppComponent } from './app.component';
@@ -33,6 +34,7 @@ import { StatsAllCountriesComponent } from './current/stats-all-countries.compon
 import { BarChartNewComponent } from './charts/globallynew/bar-chart-new.component';
 import { BarChartTotalComponent } from './charts/globallytotal/bar-chart-total.component';
 import { CountryListComponent } from './tables/country-list.component';
+import { CountryDetailsComponent } from './dialogs/country-details.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,8 @@ import { CountryListComponent } from './tables/country-list.component';
     StatsAllCountriesComponent,
     BarChartNewComponent,
     BarChartTotalComponent,
-    CountryListComponent
+    CountryListComponent,
+    CountryDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -69,11 +72,13 @@ import { CountryListComponent } from './tables/country-list.component';
     MatIconModule,
     MatInputModule,
     MatProgressSpinnerModule,
+    MatDialogModule,
     FormsModule,
     ReactiveFormsModule,
     ChartsModule
   ],
   providers: [CovidApiService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [CountryDetailsComponent]
 })
 export class AppModule { }

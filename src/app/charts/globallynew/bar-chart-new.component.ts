@@ -8,7 +8,7 @@ import { IGlobal } from '../../interfaces/icovidsummary';
   template: `
     <div class="chart-wrapper">
       <canvas baseChart 
-      [datasets]="barChartData"
+      [datasets]="dsOfNew"
       [labels]="barChartLabels"
       [options]="barChartOptions"
       [plugins]="barChartPlugins"
@@ -20,9 +20,9 @@ import { IGlobal } from '../../interfaces/icovidsummary';
   styleUrls: ['./bar-chart-new.component.css']
 })
 export class BarChartNewComponent implements OnInit {
-  barChartData!: ChartDataSets[];
-  globalInfo!: IGlobal;
+  dsOfNew: ChartDataSets[] = [];
   numbers: number[] = [];
+  globalInfo!: IGlobal;
   barChartOptions: ChartOptions = { responsive: true };
   barChartLabels: Label[] = ['Confirmed', 'Deaths', 'Recoverd'];
   barChartType: ChartType = 'bar';
@@ -35,10 +35,8 @@ export class BarChartNewComponent implements OnInit {
     this.numbers[0] = this.globalInfo.NewConfirmed;
     this.numbers[1] = this.globalInfo.NewDeaths;
     this.numbers[2] = this.globalInfo.NewRecovered;
-    this.barChartData = [
-      { data: this.numbers, label: 'Globally New' }
-    ];
-    console.log('barChartData ', this.barChartData);
+    this.dsOfNew = [{ data: this.numbers, label: 'New Global Covid-19' }];
+    //console.log('dsOfNew ', this.dsOfNew);
   }
 
   async ngOnInit() {

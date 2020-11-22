@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator'
+import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CovidApiService } from '../services/covid-api.service';
 import { ICountry } from '../interfaces/icountry';
+import { CountryDetailsComponent } from '../dialogs/country-details.component';
 
 @Component({
   selector: 'app-country-list',
@@ -18,7 +20,7 @@ export class CountryListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator, {static: false})
   paginator: MatPaginator = new MatPaginator(new MatPaginatorIntl(), ChangeDetectorRef.prototype);
  
-  constructor(private apiService: CovidApiService) { }
+  constructor(private apiService: CovidApiService, private matDialog: MatDialog) { }
  
   ngOnInit() {
     this.allCountries();
@@ -40,11 +42,21 @@ export class CountryListComponent implements OnInit, AfterViewInit {
     this.dataSource.filter = value.trim().toLocaleLowerCase();
   }
 
+  public openDialog(country: string) {
+    console.log(country)
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.position = { 'top': '0', left: '0' };
+    dialogConfig.autoFocus = true;
+    dialogConfig.id = country;
+    this.matDialog.open(CountryDetailsComponent, dialogConfig);
+  }
+
   public customSort = (event: any) => {
     console.log(event);
   }
-
+}
+/*
   public redirectToDetails = (id: string) => {
     // megjeleniteni egy felugro ablakkban !!!
   }
-}
+*/

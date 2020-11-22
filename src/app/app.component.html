@@ -1,8 +1,17 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <span style="font-size: 30px;">Global Covid-19 statistics on day {{ dateStr }}</span>
+  </mat-toolbar-row>
+  <mat-toolbar-row>
+    <span style="font-size: 20px;">Angular Material SPA created by <b>Istvan Kun</b></span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<!-- 
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <!-- <button mat-icon-button>
+    <button mat-icon-button>
       <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
-    </button> -->
+    </button>
     <span class="menu-spacer"></span>
     <div>
       <a mat-button [routerLink]="'/accounts'"> Globally New </a>
@@ -16,7 +25,6 @@
     <span style="font-size: 12px;">Global Covid-19 statistics on day {{ dateStr }}</span>
   </mat-toolbar-row>
 </mat-toolbar>
-<!-- 
 <mat-sidenav-container>
   <mat-sidenav #sidenav>
     <mat-nav-list>
@@ -36,9 +44,7 @@
 </mat-sidenav-container>
  -->
 <mat-slider min="1" max="100" step="1" value="1"></mat-slider>
-
 <div class="content" role="main">
-
   <section>
     <mat-card class="example-card">
       <mat-card-header>
@@ -160,7 +166,6 @@
   </mat-card>
 </section>
 </div>
-
 <router-outlet></router-outlet>
 
 <style>
