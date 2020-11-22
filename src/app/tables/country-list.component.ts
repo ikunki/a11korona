@@ -11,7 +11,7 @@ import { ICountry } from '../interfaces/icountry';
   styleUrls: ['./country-list.component.css']
 })
 export class CountryListComponent implements OnInit, AfterViewInit {
-  public displayedColumns: string[] = ['Country ', ' ISO2 ', ' Slug'];
+  public displayedColumns: string[] = ['country', 'iso2', 'slug', 'details'];
   public dataSource = new MatTableDataSource<ICountry>();
   @ViewChild(MatSort)
   sort: MatSort = new MatSort;
