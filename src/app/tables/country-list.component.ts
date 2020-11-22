@@ -22,15 +22,15 @@ export class CountryListComponent implements OnInit, AfterViewInit {
  
   constructor(private apiService: CovidApiService, private matDialog: MatDialog) { }
  
-  ngOnInit() {
-    this.allCountries();
-  }
- 
   public allCountries = () => {
     this.apiService.getCountries()
     .subscribe((res: ICountry[]) => {
       this.dataSource.data = res as ICountry[];
     });
+  }
+ 
+  ngOnInit() {
+    this.allCountries();
   }
 
   ngAfterViewInit(): void {
@@ -43,9 +43,9 @@ export class CountryListComponent implements OnInit, AfterViewInit {
   }
 
   public openDialog(country: string) {
-    console.log(country)
+    //console.log(country)
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.position = { 'top': '0', left: '0' };
+    //dialogConfig.position = { 'top': '0', left: '0' };
     dialogConfig.autoFocus = true;
     dialogConfig.id = country;
     this.matDialog.open(CountryDetailsComponent, dialogConfig);

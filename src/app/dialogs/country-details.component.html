@@ -1,6 +1,12 @@
-<h2 mat-dialog-title>Dialog title</h2>
+<h2 mat-dialog-title>Country Covid-19 details</h2>
 <mat-dialog-content>
-    <p>Country: {{ this.dialogRef.id }} </p>
+    <p>Country: {{ this.country.Country }} </p>
+    <p>NewConfirmed: {{ this.country.NewConfirmed }} </p>
+    <p>NewDeaths: {{ this.country.NewDeaths }} </p>
+    <p>NewRecovered: {{ this.country.NewRecovered }} </p>
+    <p>TotalConfirmed: {{ this.country.TotalConfirmed }} </p>
+    <p>TotalDeaths: {{ this.country.TotalDeaths }} </p>
+    <p>TotalRecovered: {{ this.country.TotalRecovered }} </p>
 </mat-dialog-content>
 <mat-dialog-actions>
     <button class="mat-raised-button" (click)="close()">Close</button>
